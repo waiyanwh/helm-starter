@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Create Tiller ServiceAccount.
+      k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: ServiceAccount
+          metadata:
+            name: tiller
+            namespace: kube-system
+
+    - name: Apply Tiller RBAC definition.
+      k8s:
+        state: present
+        src: files/rbac.yaml
+
+    - name: Set up Helm and Tiller.
+      command: helm init --service-account tiller
+      register: helm_init_result
+      changed_when: "'already installed' not in helm_init_result.stdout"
