@@ -6,4 +6,12 @@
 * helm
 * kubernetes cluster
 
+#### Run
+```bash
+ansible-playbook helm.yaml
+```
+OR
+```bash
+./start-helm.sh
+```
 
