@@ -5,6 +5,7 @@
   tasks:
     - name: Create Tiller ServiceAccount.
       k8s:
+        context: < YOUR-CLUSTER-NAME >
         state: present
         definition:
           apiVersion: v1
